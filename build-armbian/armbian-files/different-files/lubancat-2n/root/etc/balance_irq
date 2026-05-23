@@ -1,0 +1,26 @@
+# /etc/balance_irq
+# 鲁班猫2n 4网口优化模板
+# 先观察 /proc/interrupts 确认 eth2/eth3 的真实队列名
+
+# 1. 2.5G PCIe LAN（假设为 eth2）
+# RX 放 CPU2 / CPU3
+eth2-0  4
+eth2-1  3
+
+# TX 放 CPU0 / CPU1
+eth2-16 2
+eth2-18 1
+
+# 2. 2.5G PCIe WAN（假设为 eth3）
+# RX 放 CPU2 / CPU3
+eth3-0  3
+eth3-1  4
+
+# TX 放 CPU0 / CPU1
+eth3-16 1
+eth3-18 2
+
+# 3. 2 个千兆口
+# 先简单分散到两个空闲核
+eth0  2
+eth1  4
